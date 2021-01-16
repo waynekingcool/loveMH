@@ -14,3 +14,6 @@ Redis:
 
 jwt:
 1.npm install koa-jwt --save
+
+数据库:
+1.创建utils文件夹, 创建env.js文件, 包含环境变量.
