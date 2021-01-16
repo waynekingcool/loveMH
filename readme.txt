@@ -17,3 +17,9 @@ jwt:
 
 数据库:
 1.创建utils文件夹, 创建env.js文件, 包含环境变量.
+2.创建conf文件夹,创建db.js文件,包含数据环境变量.
+3.创建db文件夹,创建seq.js文件,包含seq实例. 创建sync.js文件同步到数据库.
+4.创建db/type.js文件,包含数据类型.
+5.创建db/model文件夹,创建User.js模型文件.
+6.创建db/model/index.js文件,引入User模型.
+7.node src/db/sync.js 创建表同步到mysql中.
