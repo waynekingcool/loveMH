@@ -23,3 +23,6 @@ jwt:
 5.创建db/model文件夹,创建User.js模型文件.
 6.创建db/model/index.js文件,引入User模型.
 7.node src/db/sync.js 创建表同步到mysql中.
+
+路由:
+1.创建route/user.js文件, 建立用户路由,并且在app.js中引入.
