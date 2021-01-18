@@ -42,4 +42,7 @@ class ErrorModel extends BaseResModel {
     }
 }
 
-
+module.exports = {
+    SuccessModel,
+    ErrorModel
+}

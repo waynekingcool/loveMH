@@ -4,7 +4,13 @@
  */
 
 const { createUser } = require('../service/user')
+const { SuccessModel, ErrorModel} = require('../model/ResModel')
+const { registerUserFailInfo } = require('../model/ErrorInfo')
 
+/**
+ * 创建用户
+ * @param {Object} param0 用户所需参数
+ */
 async function register(
     {
         userName,
@@ -14,5 +20,20 @@ async function register(
         isAdmin
     }
 ) {
-    
+    try {
+        await createUser({
+            userName,
+            password,
+            email,
+            avator,
+            isAdmin
+        })
+        return new SuccessModel()
+    } catch (error) {
+        return new ErrorModel(registerUserFailInfo)
+    }
+}
+
+module.exports = {
+    register
 }

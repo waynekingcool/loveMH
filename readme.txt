@@ -30,3 +30,6 @@ jwt:
 3.创建src/service/user.js文件
 4.创建src/model/ResModel.js文件,返回信息model
 5.创建src/model/ErrorInfo.js文件,返回错误信息
+service用于和数据库交互,返回查询数据库的结果.
+controller用于接收service返回的数据,并且相关逻辑也在controller中.
+route用于接收客户端传递来的参数,并且将参数分发给对应的controller,并结果返回给客户端.
