@@ -6,6 +6,7 @@
 const { createUser } = require('../service/user')
 const { SuccessModel, ErrorModel} = require('../model/ResModel')
 const { registerUserFailInfo } = require('../model/ErrorInfo')
+const { doCrypto } = require('../utils/cryp')
 
 /**
  * 创建用户
@@ -23,7 +24,7 @@ async function register(
     try {
         await createUser({
             userName,
-            password,
+            password: doCrypto(password),
             email,
             avator,
             isAdmin

@@ -33,3 +33,8 @@ jwt:
 service用于和数据库交互,返回查询数据库的结果.
 controller用于接收service返回的数据,并且相关逻辑也在controller中.
 route用于接收客户端传递来的参数,并且将参数分发给对应的controller,并结果返回给客户端.
+
+用户注册:
+1.创建src/conf/secretKeys.js文件,用于保存加密密钥.
+2.创建src/utils/cryp.js文件,用于对字段进行加密.
+3.注册的时候(controller)对密码进行加密.
