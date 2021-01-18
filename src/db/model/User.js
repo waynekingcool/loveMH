@@ -4,7 +4,7 @@
  */
 
 const seq = require('../seq')
-const { STRING } = require('../type')
+const { STRING, BOOLEAN } = require('../type')
 
 const User = seq.define('user', {
     userName: {
@@ -26,6 +26,12 @@ const User = seq.define('user', {
     avator: {
         type: STRING,
         comment: '头像'
+    },
+    isAdmin: {
+        type: BOOLEAN,
+        comment: '是否为管理员',
+        // 默认为false
+        defaultValue: false
     }
 })
 

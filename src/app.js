@@ -6,7 +6,9 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+// 引入路由
 const index = require('./routes/index')
+const userApiRouter = require('./routes/user')
 
 // error handler
 onerror(app)
@@ -33,6 +35,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
+app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

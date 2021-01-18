@@ -26,3 +26,7 @@ jwt:
 
 路由:
 1.创建route/user.js文件, 建立用户路由,并且在app.js中引入.
+2.创建src/controller/user.js文件
+3.创建src/service/user.js文件
+4.创建src/model/ResModel.js文件,返回信息model
+5.创建src/model/ErrorInfo.js文件,返回错误信息
