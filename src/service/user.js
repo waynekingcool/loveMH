@@ -49,9 +49,14 @@ async function getUserInfo(userName, password) {
         where: whereOpt
     })
 
-    console.log('查询到的用户:', user.dataValues)
+    console.log('查询到的用户:', user)
+
+    if (user) {
+        return user.dataValues
+    } else {
+        return user
+    }
     
-    return user
 }
 
 module.exports = {

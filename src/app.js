@@ -5,6 +5,9 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+// jwt
+const jwt = require('koa-jwt')
+const { JWT_SECRET_KEY } = require('./conf/secretKeys')
 
 // 引入路由
 const index = require('./routes/index')
@@ -20,6 +23,12 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
+
+app.use(jwt({
+  secret: JWT_SECRET_KEY
+}).unless({
+  path: [/^\/api\/user/]   //忽略那些不需要jwt的路由
+}))
 
 // app.use(views(__dirname + '/views', {
 //   extension: 'pug'

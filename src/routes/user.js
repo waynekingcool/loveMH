@@ -3,7 +3,7 @@
  */
 
 const router = require('koa-router')()
-const { register, isUserExist } = require('../controller/user')
+const { register, isUserExist, login, tokenToUserInfo } = require('../controller/user')
 
 // 前缀
 router.prefix('/api/user')
@@ -23,6 +23,17 @@ router.post('/register', async (ctx, next) => {
 router.post('/isExist', async (ctx, next) => {
     const { userName } = ctx.request.body
     ctx.body = await isUserExist(userName)
+})
+
+router.post('/login', async (ctx, next) => {
+    const { userName, password } = ctx.request.body
+    ctx.body = await login(userName, password)
+})
+
+router.post('/getUserInfo', async (ctx, next) => {
+    // 获取在header中的token
+    const token  = ctx.request.header.authorization
+    ctx.body = await tokenToUserInfo(token)
 })
 
 

@@ -14,6 +14,7 @@ Redis:
 
 jwt:
 1.npm install koa-jwt --save
+2.npm install jsonwebtoken --save
 
 数据库:
 1.创建utils文件夹, 创建env.js文件, 包含环境变量.
@@ -39,4 +40,20 @@ route用于接收客户端传递来的参数,并且将参数分发给对应的co
 2.创建src/utils/cryp.js文件,用于对字段进行加密.
 3.注册的时候(controller)对密码进行加密.
 
-todo: 验证用户是否存在
+用户登录jwt:
+1.在app.js中引入
+    const jwt = require('koa-jwt')
+    app.use(jwt({
+        secret: 'wanbin'
+    }).unless({
+        path: [/^\/users\/login/]   //忽略那些路由需要jwt
+    }))
+2.安装加密工具 npm install jsonwebtoken --save.
+3.在需要生成token的js文件中引入
+    const jwt = require('jsonwebtoken')
+    // 需要加密的用户信息, 秘钥, 过期时间1小时
+    let token = jwt.sign(userInfo, SECRET, { expiresIn: '1h' })
+4.解密
+    const util = require('util') 自带工具
+    const verify = util.promisify(jwt.verify)  将callback转为promise
+    const payload = await verify(token.split(' ')[1], SECRET)  解密后即为用户信息
