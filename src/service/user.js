@@ -32,6 +32,29 @@ async function createUser(
     return result.dataValues
 }
 
+/**
+ * 查询用户信息
+ * @param {string} userName 用户名
+ * @param {string} password 密码
+ */
+async function getUserInfo(userName, password) {
+    const whereOpt = { userName }
+
+    // 如果密码存在
+    if (password) {
+        Object.assign(whereOpt, { password })
+    }
+
+    const user = await User.findOne({
+        where: whereOpt
+    })
+
+    console.log('查询到的用户:', user.dataValues)
+    
+    return user
+}
+
 module.exports = {
-    createUser
+    createUser,
+    getUserInfo
 }

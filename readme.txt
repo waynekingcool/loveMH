@@ -38,3 +38,5 @@ route用于接收客户端传递来的参数,并且将参数分发给对应的co
 1.创建src/conf/secretKeys.js文件,用于保存加密密钥.
 2.创建src/utils/cryp.js文件,用于对字段进行加密.
 3.注册的时候(controller)对密码进行加密.
+
+todo: 验证用户是否存在

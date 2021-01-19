@@ -1,0 +1,25 @@
+Sequelize使用:
+1.Sequelize提供了create方法
+    const jane = await User.create({ name: "Jane" })
+2.select查询:
+    const users = await User.findAll()
+3.查询特定属性:
+    const users = await User.findAll({
+        attributes: ['foo', 'bar']
+    })
+4.应用where子句:
+    const users = await User.findAll({
+        where: {
+            authorId: 2
+        },
+        attributes: ['foo', 'bar']
+    })
+5.简单update查询:
+    const user = await User.update({name: 'king'},{
+        where: {
+            id: 2
+        },
+        order: [
+            ['title', 'desc']
+        ]
+    })

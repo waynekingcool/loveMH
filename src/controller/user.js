@@ -3,9 +3,9 @@
  * @author king
  */
 
-const { createUser } = require('../service/user')
+const { createUser, getUserInfo } = require('../service/user')
 const { SuccessModel, ErrorModel} = require('../model/ResModel')
-const { registerUserFailInfo } = require('../model/ErrorInfo')
+const { registerUserFailInfo, userIsExistInfo } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp')
 
 /**
@@ -35,6 +35,22 @@ async function register(
     }
 }
 
+/**
+ * 查询用户是否存在
+ * @param {string} userName 用户名
+ */
+async function isUserExist(userName) {
+    const result = await getUserInfo(userName)
+    if (!result) {
+        // 不存在
+        return new SuccessModel()
+    }else {
+        // 存在
+        return new ErrorModel(userIsExistInfo)
+    }
+}
+
 module.exports = {
-    register
+    register,
+    isUserExist
 }
