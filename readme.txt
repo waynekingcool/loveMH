@@ -58,3 +58,6 @@ route用于接收客户端传递来的参数,并且将参数分发给对应的co
     const verify = util.promisify(jwt.verify)  将callback转为promise
     const payload = await verify(token.split(' ')[1], SECRET)  解密后即为用户信息
 
+CORS跨域问题:
+1. npm install koa2-cors --save
+2. 在app.js文件中引入koa2-cors,并进行相关设置即可.
