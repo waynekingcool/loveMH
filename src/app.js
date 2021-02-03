@@ -43,6 +43,8 @@ app.use(
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
+// 图片保存路径
+app.use(require('koa-static')(path.join(__dirname, '../uploadFiles')))
 
 app.use(jwt({
   secret: JWT_SECRET_KEY

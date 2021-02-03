@@ -61,3 +61,8 @@ route用于接收客户端传递来的参数,并且将参数分发给对应的co
 CORS跨域问题:
 1. npm install koa2-cors --save
 2. 在app.js文件中引入koa2-cors,并进行相关设置即可.
+
+上传图片:
+1. npm install formidable-upload-koa --save  上传图片
+2. npm install fs-extra --save  文件模块扩展
+3. 在app.js中添加图片保存路径.

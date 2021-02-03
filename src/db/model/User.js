@@ -32,7 +32,12 @@ const User = seq.define('user', {
         comment: '是否为管理员',
         // 默认为false
         defaultValue: false
-    }
+    },
+    // isDelte: {
+    //     type: BOOLEAN,
+    //     comment: '软删除1删除 0 未删除',
+    //     defaultValue: false
+    // }
 })
 
 module.exports = {
