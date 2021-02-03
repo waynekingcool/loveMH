@@ -18,5 +18,13 @@ module.exports = {
     getUserInfoFailInfo: {
         errno: 100004,
         message: '获取用户信息失败'
+    },
+    usernameCantBeNull: {
+        errno: 100005,
+        message: '用户名不能为空'
+    },
+    passwordCanBeNull: {
+        errno: 100006,
+        message: '密码不能为空'
     }
 }

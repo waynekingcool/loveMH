@@ -9,7 +9,9 @@ const {
     registerUserFailInfo, 
     userIsExistInfo, 
     loginFailInfo, 
-    getUserInfoFailInfo 
+    getUserInfoFailInfo,
+    usernameCantBeNull,
+    passwordCanBeNull
 } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp')
 // jsonwebtoken
@@ -18,6 +20,8 @@ const { JWT_SECRET_KEY } = require('../conf/secretKeys')
 // token解密
 const util = require('util')
 const verify = util.promisify(jwt.verify)
+// 工具类
+const { isEmpty } = require('../utils/wbutils')
 
 /**
  * 创建用户
@@ -67,6 +71,14 @@ async function isUserExist(userName) {
  * @param {string} password 用户密码
  */
 async function login(userName, password) {
+    // 判断用户名或密码是否为空
+    if ( isEmpty(userName)) {
+        return new ErrorModel(usernameCantBeNull)
+    }
+    if ( isEmpty(password)) {
+        return new ErrorModel(passwordCanBeNull)
+    }
+
     const result = await getUserInfo(userName, doCrypto(password))
     if (result) {
         // 登录成功
