@@ -26,9 +26,18 @@ function isEmpty (str) {
  * @param {string} token 后台给的token
  */
 async function tokenDeci (token) {
-    const userInfo = await verify(token, JWT_SECRET_KEY)
-    if (userInfo) {
-        return userInfo
+    // 获取token
+    if (!isEmpty(token) && token.indexOf('Bearer') == 0){
+        //不为空,并且包含Bearer
+        let temp = token.slice(7)
+        const userInfo = await verify(temp, JWT_SECRET_KEY)
+        if (userInfo) {
+            // 解密成功
+            return userInfo
+        } else {
+            // 解密失败
+            return null
+        }
     } else {
         return null
     }

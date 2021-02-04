@@ -14,7 +14,8 @@ const { isEmpty, tokenDeci } = require('../utils/wbutils')
  */
 async function loginCheck(ctx, next) {
     const token = ctx.request.header.authorization
-    if (isEmpty(token)) {
+    const userInfo = await tokenDeci(token)
+    if (!userInfo) {
         // 空
         ctx.body = new ErrorModel(loginCheckFailInfo)
     } else {

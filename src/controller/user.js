@@ -21,7 +21,7 @@ const { JWT_SECRET_KEY } = require('../conf/secretKeys')
 const util = require('util')
 const verify = util.promisify(jwt.verify)
 // 工具类
-const { isEmpty } = require('../utils/wbutils')
+const { isEmpty, tokenDeci } = require('../utils/wbutils')
 
 /**
  * 创建用户
@@ -84,7 +84,8 @@ async function login(userName, password) {
         // 登录成功
         let token = jwt.sign(result, JWT_SECRET_KEY, { expiresIn: '2days' })
         console.log("登录后获得的token:",token);
-        
+        // 格式为Bearer token
+        token = 'Bearer ' + token
         return new SuccessModel(token)
     } else {
         // 登录失败
@@ -98,7 +99,8 @@ async function login(userName, password) {
  */
 async function tokenToUserInfo(token) {
     // 将callback转为promise
-    const userInfo = await verify(token, JWT_SECRET_KEY)
+    // const userInfo = await verify(token, JWT_SECRET_KEY)
+    const userInfo = await tokenDeci(token)
     if (userInfo) {
         //存在
         return new SuccessModel(userInfo)
