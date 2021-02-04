@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const app = new Koa()
 // const views = require('koa-views')
+const path = require('path')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
@@ -12,6 +13,7 @@ const { JWT_SECRET_KEY } = require('./conf/secretKeys')
 // 引入路由
 const index = require('./routes/index')
 const userApiRouter = require('./routes/user')
+const utilApiRouter = require('./routes/uploadUtils')
 
 const cors = require('koa2-cors')
 
@@ -67,6 +69,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(utilApiRouter.routes(), utilApiRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

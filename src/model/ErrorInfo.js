@@ -26,5 +26,13 @@ module.exports = {
     passwordCanBeNull: {
         errno: 100006,
         message: '密码不能为空'
+    },
+    uploadFileSizeFailInfo: {
+        errno: 100007,
+        message: '图片尺寸过大'
+    },
+    loginCheckFailInfo: {
+        errno: 100008,
+        message: '您尚未登录'
     }
 }

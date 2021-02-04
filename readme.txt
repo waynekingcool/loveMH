@@ -66,3 +66,6 @@ CORS跨域问题:
 1. npm install formidable-upload-koa --save  上传图片
 2. npm install fs-extra --save  文件模块扩展
 3. 在app.js中添加图片保存路径.
+4. 增加middlewares/loginCheck.js文件,用于判断用户是否登录
+5. 增加utils/uploadUtil.js文件,用于保存上传好的图片,成功的话先移动图片到uploadFiles文件夹,然后在删除之前的图片.
+6. 增加routes/uploadUtil.js 作为上传图片api,在app.js中引入该路由
