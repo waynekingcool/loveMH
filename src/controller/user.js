@@ -3,7 +3,7 @@
  * @author king
  */
 
-const { createUser, getUserInfo } = require('../service/user')
+const { createUser, getUserInfo, getAllUserInfo } = require('../service/user')
 const { SuccessModel, ErrorModel} = require('../model/ResModel')
 const { 
     registerUserFailInfo, 
@@ -11,7 +11,8 @@ const {
     loginFailInfo, 
     getUserInfoFailInfo,
     usernameCantBeNull,
-    passwordCanBeNull
+    passwordCanBeNull,
+    getAllUserFailInfo
 } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp')
 // jsonwebtoken
@@ -110,9 +111,22 @@ async function tokenToUserInfo(token) {
     }
 }
 
+/**
+ * 获取所有用户信息
+ */
+async function getAllUser() {
+    const users = await getAllUserInfo()
+    if (users) {
+        return new SuccessModel(users)
+    } else {
+        return new ErrorModel(getAllUserFailInfo)
+    }
+}
+
 module.exports = {
     register,
     isUserExist,
     login,
-    tokenToUserInfo
+    tokenToUserInfo,
+    getAllUser
 }

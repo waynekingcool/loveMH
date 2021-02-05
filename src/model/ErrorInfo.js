@@ -34,5 +34,9 @@ module.exports = {
     loginCheckFailInfo: {
         errno: 100008,
         message: '您尚未登录'
+    },
+    getAllUserFailInfo: {
+        errno: 100009,
+        message: '获取所有用户失败'
     }
 }

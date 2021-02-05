@@ -37,7 +37,9 @@ async function saveFile({name, type, size, filePath}) {
 
     // 返回信息
     return new SuccessModel({
-        url: '/' + fileName
+        // url: '/' + fileName
+        // 直接返回完整路径
+        url: 'http://127.0.0.1:3000/' + fileName
     })
 }
 

@@ -3,7 +3,12 @@
  */
 
 const router = require('koa-router')()
-const { register, isUserExist, login, tokenToUserInfo } = require('../controller/user')
+const { register,
+    isUserExist,
+    login,
+    tokenToUserInfo,
+    getAllUser } = require('../controller/user')
+const { loginCheck } = require('../middlewares/loginChecks')
 
 // 前缀
 router.prefix('/api/user')
@@ -34,6 +39,10 @@ router.post('/getUserInfo', async (ctx, next) => {
     // 获取在header中的token
     const token  = ctx.request.header.authorization
     ctx.body = await tokenToUserInfo(token)
+})
+
+router.get('/getAllUsers', loginCheck, async(ctx, next) => {
+    ctx.body = await getAllUser()
 })
 
 

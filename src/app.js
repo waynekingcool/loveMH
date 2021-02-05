@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
-// const views = require('koa-views')
+
 const path = require('path')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
@@ -53,10 +53,6 @@ app.use(jwt({
 }).unless({
   path: [/^\/api\/user/]   //忽略那些不需要jwt的路由
 }))
-
-// app.use(views(__dirname + '/views', {
-//   extension: 'pug'
-// }))
 
 // logger
 app.use(async (ctx, next) => {

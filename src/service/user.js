@@ -3,6 +3,8 @@
  * @author king
  */
 
+const seq = require('../db/seq')
+const { QueryTypes } = require('sequelize')
 const { User } = require('../db/model/index')
 
 /**
@@ -59,7 +61,25 @@ async function getUserInfo(userName, password) {
     
 }
 
+/**
+ * 获取所有用户信息 使用sql查询
+ */
+async function getAllUserInfo() {
+    // const result = await User.findAll()
+    const result = await seq.query(`
+        select id,userName,password,email,avator,isAdmin from users
+    `, {
+        model: User,
+        mapToModel: true
+    })
+    const arr = result.map( item => {
+        return item.dataValues
+    })
+    return arr
+}
+
 module.exports = {
     createUser,
-    getUserInfo
+    getUserInfo,
+    getAllUserInfo
 }

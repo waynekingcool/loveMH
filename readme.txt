@@ -69,3 +69,8 @@ CORS跨域问题:
 4. 增加middlewares/loginCheck.js文件,用于判断用户是否登录
 5. 增加utils/uploadUtil.js文件,用于保存上传好的图片,成功的话先移动图片到uploadFiles文件夹,然后在删除之前的图片.
 6. 增加routes/uploadUtil.js 作为上传图片api,在app.js中引入该路由
+
+使用sql语句查询数据:
+1.在文件中引入sequelize对象seq
+2.使用seq.query进行查询
+3.seq.query('sql...',{ model:User, mapToModel: true})可以设置转换的model,查询出来的结果和用框架查询出来一样
