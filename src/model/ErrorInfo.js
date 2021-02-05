@@ -38,5 +38,17 @@ module.exports = {
     getAllUserFailInfo: {
         errno: 100009,
         message: '获取所有用户失败'
+    },
+    jsonSchemaFileInfo: {
+        error: 100010,
+        message: '数据格式有误'
+    },
+    idIsNullInfo: {
+        errno: 100011,
+        message: 'id不能为空'
+    },
+    updateInfoFailInfo: {
+        errno: 100012,
+        message: '更新用户信息失败'
     }
 }

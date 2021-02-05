@@ -78,8 +78,52 @@ async function getAllUserInfo() {
     return arr
 }
 
+/**
+ * 更新用户信息
+ * @param {Object} param0 需要修改的参数
+ * @param {Object}} param1 where条件
+ */
+async function updateUserInfo(
+    { newName, newPassword, newEmail, newAvator, isAdmin },
+    { id }
+) {
+    // 拼接内容
+    const updateData = {}
+    if (newName) {
+        updateData.userName = newName
+    }
+
+    if (newPassword) {
+        updateData.password = newPassword
+    }
+
+    if (newEmail) {
+        updateData.email = newEmail
+    }
+
+    if (newAvator) {
+        updateData.avator = newAvator
+    }
+
+    if (isAdmin) {
+        updateData.isAdmin = true
+    }else {
+        updateData.isAdmin = false
+    }
+
+    // 拼接查询条件
+    const whereData = { id }
+
+    const result = await User.update(updateData, {
+        where: whereData
+    })
+
+    return result[0] > 0
+}
+
 module.exports = {
     createUser,
     getUserInfo,
-    getAllUserInfo
+    getAllUserInfo,
+    updateUserInfo
 }

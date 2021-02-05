@@ -73,4 +73,11 @@ CORS跨域问题:
 使用sql语句查询数据:
 1.在文件中引入sequelize对象seq
 2.使用seq.query进行查询
-3.seq.query('sql...',{ model:User, mapToModel: true})可以设置转换的model,查询出来的结果和用框架查询出来一样
+3.seq.query('sql语句',{ model:User, mapToModel: true})可以设置转换的model,查询出来的结果和用框架查询出来一样
+
+更新用户信息:
+1. npm install ajv --save
+2. 增加validator/validate.js文件
+3. 增加validator/user.js文件,用于增加验证规则
+4. 增加中间件middleware/validator.js
+

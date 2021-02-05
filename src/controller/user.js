@@ -3,7 +3,13 @@
  * @author king
  */
 
-const { createUser, getUserInfo, getAllUserInfo } = require('../service/user')
+const { 
+    createUser,
+    getUserInfo, 
+    getAllUserInfo, 
+    updateUserInfo 
+} = require('../service/user')
+
 const { SuccessModel, ErrorModel} = require('../model/ResModel')
 const { 
     registerUserFailInfo, 
@@ -12,8 +18,11 @@ const {
     getUserInfoFailInfo,
     usernameCantBeNull,
     passwordCanBeNull,
-    getAllUserFailInfo
+    getAllUserFailInfo,
+    idIsNullInfo,
+    updateInfoFailInfo
 } = require('../model/ErrorInfo')
+
 const { doCrypto } = require('../utils/cryp')
 // jsonwebtoken
 const jwt = require('jsonwebtoken')
@@ -123,10 +132,45 @@ async function getAllUser() {
     }
 }
 
+async function updateUser({token, userId, userName, email, avator, isAdmin }) {
+    if(isEmpty(userId)) {
+        return new ErrorModel(idIsNullInfo)
+    }
+
+    const result = await updateUserInfo({
+        newName: userName,
+        newEmail: email,
+        newAvator: avator,
+        isAdmin: isAdmin
+    },
+    {
+        id: userId
+    })
+
+    if (result) {
+        let userInfo = await tokenDeci(token)
+        if (userInfo.id === userId) {
+            // 如果是自己客户端需要重新保存下token
+            let newUserInfo = await getUserInfo(userName)
+            let newToken = jwt.sign(newUserInfo, JWT_SECRET_KEY, { expiresIn: '2days' })
+            console.log("登录后获得的token:",newToken);
+            // 格式为Bearer token
+            newToken = 'Bearer ' + newToken
+            return new SuccessModel(newToken)
+        } else {
+            return new SuccessModel()
+        }
+    } else {
+        return new ErrorModel(updateInfoFailInfo)
+    }
+
+}
+
 module.exports = {
     register,
     isUserExist,
     login,
     tokenToUserInfo,
-    getAllUser
+    getAllUser,
+    updateUser
 }

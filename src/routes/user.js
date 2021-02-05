@@ -7,7 +7,9 @@ const { register,
     isUserExist,
     login,
     tokenToUserInfo,
-    getAllUser } = require('../controller/user')
+    getAllUser,
+    updateUser
+} = require('../controller/user')
 const { loginCheck } = require('../middlewares/loginChecks')
 
 // 前缀
@@ -43,6 +45,13 @@ router.post('/getUserInfo', async (ctx, next) => {
 
 router.get('/getAllUsers', loginCheck, async(ctx, next) => {
     ctx.body = await getAllUser()
+})
+
+// 更新信息
+router.post('/updateUserInfo', async(ctx, next) => {
+    const token  = ctx.request.header.authorization
+    const { userId, userName, email, avator, isAdmin} = ctx.request.body
+    ctx.body = await updateUser({ token,userId, userName, email, avator, isAdmin})
 })
 
 
